@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-lg-8">
+
+            <div class="row">
+
+                <div class="col-lg-6" *ngFor="let product of products; let i = index">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-center border-primary" style="background-color: violet;">
+                          <h4 class="my-0 fw-normal">{{product.name}}</h4>
+                        </div>
+                        <div class="card-body">
+        
+                        <img [src]="product.img" height="50%" width="50%">
+                          <h1 class="card-title pricing-card-title">${{product.price}}<small class="text-muted fw-light">/USD</small></h1>
+                          <ul class="list-unstyled mt-3 mb-4">
+                            <li>{{product.description}}</li>
+                            
+                          </ul>
+                          <button type="button" class="w-100 btn btn-lg btn-outline-primary" (click)="agregar(product)"><i class="fa-sharp fa-solid fa-cart-shopping" style="margin-right: 5px;"></i>Agregar al carrito</button>
+                        </div>
+                      </div>
+                </div>
+    
+                
+            </div>
+
+            
+
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="alert alert-info text-center">
+                <h4>Your Cart</h4>
+            </div>
+
+            <ul class="list-group" *ngFor="let item of itemsCart; let i = index">
+                <li class="list-group-item">{{item.name}} (Cantidad: {{item.qty}}) Total: ${{item.price * item.qty}}</li>
+            </ul>
+
+            <div class="alert alert-danger text-center" *ngIf="itemsCart.length > 0">
+                <h4>Total: ${{total}} USD</h4>
+
+
+                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
